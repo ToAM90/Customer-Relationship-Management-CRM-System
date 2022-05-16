@@ -1,5 +1,6 @@
 package com.techelevator.hr;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -34,5 +35,27 @@ public class EmployeeTests {
         employee.raiseSalary(-10); //"raise" by negative 10%
 
         assertEquals("Salary should remain the same when raise percentage is negative.",100, employee.getSalary(),0.0);
+    }
+
+    @Test
+    public void get_employee_balance_due_with_50_percent_walking_discount(){
+        Employee employee = new Employee("Test", "Testerson");
+        Map<String, Double> testMap = new HashMap<>();
+        testMap.put("WaLking", 23.00);
+        testMap.put("Bathing", 25.00);
+
+        double total = employee.getBalanceDue(testMap);
+
+        Assert.assertEquals("The employee's balance due is not correct.", 36.50, total, 0.0);
+    }
+
+    @Test
+    public void get_empoloyee_balance_due_with_no_services(){
+        Employee employee = new Employee("Test", "Testerson");
+        Map<String, Double> testMap = new HashMap<>();
+
+        double total = employee.getBalanceDue(testMap);
+
+        Assert.assertEquals("The employee's balance due is not correct.", 0.00, total, 0.0);
     }
 }
